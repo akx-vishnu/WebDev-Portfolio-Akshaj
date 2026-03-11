@@ -35,7 +35,7 @@ const Hero = () => {
                             I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple">AKSHAJ V NAIR</span>
                         </h2>
                         <h3 className="text-xl sm:text-3xl font-semibold text-gray-300 mb-6">
-                            Modern Web Developer | React Specialist
+                            Full Stack Developer | Modern Web Developer
                         </h3>
 
                         <p className="text-gray-400 py-4 max-w-lg text-lg leading-relaxed">

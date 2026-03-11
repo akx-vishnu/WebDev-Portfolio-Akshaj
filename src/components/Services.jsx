@@ -1,10 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaLaptopCode, FaBusinessTime, FaUniversity, FaUserTie, FaCalendarAlt, FaBoxOpen, FaProjectDiagram } from 'react-icons/fa';
+import { FaLaptopCode, FaBusinessTime, FaUniversity, FaUserTie, FaCalendarAlt, FaBoxOpen, FaProjectDiagram, FaCode } from 'react-icons/fa';
 import Services3D from './canvas/Services3D';
 
 const Services = () => {
     const services = [
+        {
+            id: 0,
+            title: 'Full Stack Development',
+            icon: <FaCode size={40} className="text-neon-blue" />,
+            description: 'End-to-end web applications built with modern stacks (MERN/PERN), focusing on scalable architecture, secure APIs, and seamless database integration.',
+        },
         {
             id: 1,
             title: 'Landing Pages',

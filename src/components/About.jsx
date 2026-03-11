@@ -32,8 +32,8 @@ const About = () => {
                     className="glass-card p-8 rounded-2xl border border-gray-700/50 shadow-card z-10"
                 >
                     <p className="text-lg md:text-xl mt-4 leading-relaxed text-gray-300">
-                        I’m a B.Sc. Computer Science graduate building modern, high-performance web applications that look sharp and work flawlessly.
-                        I specialize in React and contemporary frontend technologies, creating fast, scalable, and visually engaging digital experiences for real-world businesses.
+                        I’m a B.Sc. Computer Science graduate and a versatile Full Stack Developer building modern, high-performance web applications that look sharp and work flawlessly.
+                        I specialize in React and integrated full-stack architectures, creating fast, scalable, and visually engaging digital experiences from frontend to backend.
                     </p>
 
                     <br />
