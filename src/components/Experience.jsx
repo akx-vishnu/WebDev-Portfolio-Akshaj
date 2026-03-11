@@ -23,6 +23,13 @@ const Experience = () => {
             icon: "🐍"
         },
         {
+            date: "OCT 2024 – NOV 2024",
+            role: "Web Development Intern",
+            company: "Corizo",
+            description: "Completed a one-month web development training and internship program covering modern web technologies and full-stack development practices.",
+            icon: "💻"
+        },
+        {
             date: "SEP 2024 – OCT 2024",
             role: "Cybersecurity Intern",
             company: "Corizo",

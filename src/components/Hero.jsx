@@ -61,7 +61,7 @@ const Hero = () => {
                                 <span className="text-xs text-gray-500 uppercase tracking-widest font-mono">Certs</span>
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-3xl font-bold text-white">3</span>
+                                <span className="text-3xl font-bold text-white">4</span>
                                 <span className="text-xs text-gray-500 uppercase tracking-widest font-mono">Experience</span>
                             </div>
                         </div>

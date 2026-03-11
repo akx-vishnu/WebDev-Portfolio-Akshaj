@@ -11,6 +11,14 @@ A high-performance, immersive personal portfolio website built with React, Vite,
 -   **Smooth Animations:** Engaging entry and scroll transitions using Framer Motion.
 -   **Seamless Contact:** Integrated with Google Sheets via Apps Script for real-time form submissions.
 -   **Modular Architecture:** Built with a clean, component-based React structure.
+-   **Up-to-Date Experience:** Regularly updated to reflect the latest professional journey and skills.
+
+## Experiences
+
+-   **Web Development Intern** at **Corizo** (Oct 2024 – Nov 2024)
+-   **Cybersecurity Intern** at **Corizo** (Sep 2024 – Oct 2024)
+-   **Python Programming Intern** at **KELTRON** (Apr 2025 – May 2025)
+-   **Data Entry Operator** at **Rudra Travel Service** (Mar 2023 – May 2024)
 
 ## Tech Stack
 
