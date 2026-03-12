@@ -72,7 +72,7 @@ const Hero = () => {
                                 <Link
                                     to="projects"
                                     smooth={true}
-                                    duration={500}
+                                    duration={2750}
                                     offset={-80}
                                     className="group text-white w-fit px-8 py-3 flex items-center rounded-full bg-gradient-to-r from-neon-blue to-accent cursor-pointer hover:shadow-neon duration-300 transition-all shadow-[0_4px_15px_rgba(0,183,255,0.3)]"
                                 >
@@ -115,7 +115,7 @@ const Hero = () => {
                 <Link
                     to="about"
                     smooth={true}
-                    duration={500}
+                    duration={1500}
                     offset={-80}
                     className="cursor-pointer"
                 >

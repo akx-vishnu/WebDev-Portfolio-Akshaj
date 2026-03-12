@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
-import { Link } from 'react-scroll';
+import { HiOutlineChevronDoubleDown, HiOutlineChevronDoubleRight } from 'react-icons/hi';
+import { Link, scroller } from 'react-scroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -101,6 +101,16 @@ const Projects = () => {
 
     const containerRef = useRef(null);
     const scrollContainerRef = useRef(null);
+    const scrollTriggerRef = useRef(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isAtEnd, setIsAtEnd] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useGSAP(() => {
         const sections = gsap.utils.toArray('.project-card-wrapper');
@@ -110,19 +120,60 @@ const Projects = () => {
             totalScroll = scrollContainerRef.current.scrollWidth - window.innerWidth;
         }
 
-        gsap.to(sections, {
+        const anim = gsap.to(sections, {
             x: () => -totalScroll,
             ease: "none",
             scrollTrigger: {
                 trigger: containerRef.current,
                 pin: true,
                 scrub: 1,
+                onUpdate: (self) => {
+                    setIsAtEnd(self.progress > 0.98);
+                },
                 end: () => "+=" + scrollContainerRef.current.scrollWidth,
                 invalidateOnRefresh: true,
                 anticipatePin: 1
             }
         });
+
+        scrollTriggerRef.current = anim.scrollTrigger;
     }, { scope: containerRef });
+
+    const handleScrollNext = () => {
+        if (!isMobile || isAtEnd) {
+            scroller.scrollTo('certifications', {
+                smooth: true,
+                duration: isMobile ? 500 : 3000,
+                offset: -80
+            });
+            return;
+        }
+
+        const st = scrollTriggerRef.current;
+        if (!st || !scrollContainerRef.current) return;
+
+        const totalWidth = scrollContainerRef.current.scrollWidth;
+        const visibleWidth = window.innerWidth;
+        const maxHorizontalScroll = totalWidth - visibleWidth;
+
+        // Current horizontal position based on progress
+        const currentProgress = st.progress;
+        const currentX = currentProgress * maxHorizontalScroll;
+
+        // Approx step: card width (300px) + gap (24px)
+        const step = 324;
+        const nextX = Math.min(currentX + step, maxHorizontalScroll);
+
+        // Find target vertical position
+        // totalVerticalDist corresponds to the scroll distance defined in scrollTrigger end
+        const totalVerticalDist = totalWidth; 
+        const targetVerticalScroll = (nextX / maxHorizontalScroll) * totalVerticalDist + st.start;
+
+        window.scrollTo({
+            top: targetVerticalScroll,
+            behavior: 'smooth'
+        });
+    };
 
     return (
         <section
@@ -161,17 +212,17 @@ const Projects = () => {
             </div>
 
             {/* Scroll Indicator for mobile/desktop */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-[100]">
-                <Link
-                    to="certifications"
-                    smooth={true}
-                    duration={500}
-                    offset={-80}
-                    className="cursor-pointer"
+            <div 
+                className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-[100] cursor-pointer"
+                onClick={handleScrollNext}
+            >
+                <div 
+                    className="flex flex-col items-center"
                 >
                     <motion.div
                         animate={{
-                            y: [0, 8, 0],
+                            y: (isMobile && !isAtEnd) ? 0 : [0, 8, 0],
+                            x: (isMobile && !isAtEnd) ? [0, 4, 0] : 0
                         }}
                         transition={{
                             duration: 1.5,
@@ -181,13 +232,17 @@ const Projects = () => {
                         className="flex flex-col items-center"
                     >
                         <span className="text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-1 font-mono">
-                            Scroll
+                            {(isMobile && !isAtEnd) ? 'Next' : 'Scroll'}
                         </span>
                         <div className="w-9 h-9 rounded-full flex items-center justify-center border border-white/5 bg-black/20 backdrop-blur-sm shadow-neon-blue/10">
-                            <HiOutlineChevronDoubleDown className="text-neon-blue text-xl" />
+                            {(isMobile && !isAtEnd) ? (
+                                <HiOutlineChevronDoubleRight className="text-neon-blue text-xl" />
+                            ) : (
+                                <HiOutlineChevronDoubleDown className="text-neon-blue text-xl" />
+                            )}
                         </div>
                     </motion.div>
-                </Link>
+                </div>
             </div>
         </section>
     );
