@@ -6,9 +6,17 @@ import { Float, Icosahedron, Torus } from "@react-three/drei";
 const TechEnvironment = () => {
     const pointsRef = useRef();
     const groupRef = useRef();
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Create particles forming a code/space tunnel
-    const particlesCount = 8000;
+    const particlesCount = isMobile ? 4000 : 8000;
     const positions = useMemo(() => {
         const positions = new Float32Array(particlesCount * 3);
         for (let i = 0; i < particlesCount; i++) {
@@ -22,7 +30,7 @@ const TechEnvironment = () => {
             positions[i * 3 + 2] = z;
         }
         return positions;
-    }, []);
+    }, [isMobile, particlesCount]);
 
     const [scrollY, setScrollY] = useState(0);
 
@@ -84,13 +92,13 @@ const TechEnvironment = () => {
                     color="#00f3ff" // neon blue
                     sizeAttenuation={true}
                     transparent={true}
-                    opacity={0.8}
+                    opacity={isMobile ? 0.4 : 0.8}
                     blending={THREE.AdditiveBlending}
                 />
             </points>
 
             {/* Floating Developer/Abstract Geometry */}
-            <Float speed={2} rotationIntensity={2} floatIntensity={1} position={[-2, 1, -5]}>
+            <Float speed={2} rotationIntensity={2} floatIntensity={1} position={isMobile ? [-3, 4, -5] : [-2, 1, -5]}>
                 <Icosahedron args={[0.5, 0]}>
                     <meshBasicMaterial color="#bc13fe" wireframe transparent opacity={0.6} />
                 </Icosahedron>

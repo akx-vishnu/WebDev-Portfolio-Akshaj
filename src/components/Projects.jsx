@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import { HiOutlineChevronDoubleDown } from 'react-icons/hi';
+import { Link } from 'react-scroll';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -126,7 +128,7 @@ const Projects = () => {
         <section
             name="projects"
             ref={containerRef}
-            className="w-full h-[100dvh] min-h-[500px] bg-black-100 text-white relative overflow-hidden flex flex-col pt-12 md:pt-20 pb-4 md:pb-8"
+            className="w-full h-[100dvh] min-h-[500px] bg-black-100 text-white relative overflow-hidden flex flex-col pt-24 md:pt-20 pb-4 md:pb-8"
         >
             {/* Background Glow */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
@@ -135,7 +137,7 @@ const Projects = () => {
             </div>
 
             {/* Static Header Elements */}
-            <div className="w-full px-4 md:px-8 lg:px-[calc((100vw-1280px)/2+1rem)] z-[100] pointer-events-none shrink-0">
+            <div className="w-full px-4 md:px-8 lg:px-[calc((100vw-1280px)/2+1rem)] z-[100] relative shrink-0">
                 <h2 className="text-4xl md:text-5xl font-bold inline border-b-4 border-neon-blue text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple relative z-10">
                     Projects
                 </h2>
@@ -156,6 +158,36 @@ const Projects = () => {
                     {/* Spacer to push the last card away from the edge */}
                     <div className="project-card-wrapper w-[10vw] h-full flex-shrink-0"></div>
                 </div>
+            </div>
+
+            {/* Scroll Indicator for mobile/desktop */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-[100]">
+                <Link
+                    to="certifications"
+                    smooth={true}
+                    duration={500}
+                    offset={-80}
+                    className="cursor-pointer"
+                >
+                    <motion.div
+                        animate={{
+                            y: [0, 8, 0],
+                        }}
+                        transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            repeatType: "loop",
+                        }}
+                        className="flex flex-col items-center"
+                    >
+                        <span className="text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-1 font-mono">
+                            Scroll
+                        </span>
+                        <div className="w-9 h-9 rounded-full flex items-center justify-center border border-white/5 bg-black/20 backdrop-blur-sm shadow-neon-blue/10">
+                            <HiOutlineChevronDoubleDown className="text-neon-blue text-xl" />
+                        </div>
+                    </motion.div>
+                </Link>
             </div>
         </section>
     );

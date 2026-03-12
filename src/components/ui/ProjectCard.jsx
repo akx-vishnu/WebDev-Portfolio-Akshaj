@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const ProjectCard = ({ project }) => {
     const { title, description, techStack, links, status } = project;
     const [isMobile, setIsMobile] = useState(false);
+    const [isFlipped, setIsFlipped] = useState(false);
+    const cardRef = useRef(null);
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -12,9 +14,40 @@ const ProjectCard = ({ project }) => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    useEffect(() => {
+        if (!isMobile) return;
+
+        const handleClickOutside = (event) => {
+            if (cardRef.current && !cardRef.current.contains(event.target)) {
+                setIsFlipped(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('touchstart', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+        };
+    }, [isMobile]);
+
+    const handleCardClick = () => {
+        if (isMobile) {
+            setIsFlipped(!isFlipped);
+        }
+    };
+
     return (
-        <div className="group w-[300px] md:w-[380px] lg:w-[400px] h-full flex-shrink-0 relative [perspective:1500px] z-10 hover:z-50 pointer-events-auto">
-            <div className="w-full h-full relative transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-lg rounded-2xl cursor-default pointer-events-auto">
+        <div 
+            ref={cardRef}
+            onClick={handleCardClick}
+            className="group w-[300px] md:w-[380px] lg:w-[400px] h-full flex-shrink-0 relative [perspective:1500px] z-10 hover:z-50 pointer-events-auto"
+        >
+            <div className={`w-full h-full relative transition-all duration-700 [transform-style:preserve-3d] shadow-lg rounded-2xl cursor-default pointer-events-auto ${
+                isMobile 
+                    ? (isFlipped ? '[transform:rotateY(180deg)]' : '[transform:rotateY(0deg)]') 
+                    : 'group-hover:[transform:rotateY(180deg)]'
+            }`}>
 
                 {/* Front side */}
                 <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-2xl p-5 md:p-8 bg-gradient-to-b from-tertiary to-[#161b22] border border-gray-700/50 flex flex-col items-center overflow-hidden z-20">
@@ -56,7 +89,11 @@ const ProjectCard = ({ project }) => {
                         {techStack.map((tech, index) => (
                             <span
                                 key={index}
-                                className="text-[10px] md:text-xs font-medium px-2.5 md:px-3 py-1.5 rounded-full bg-black-200 text-neon-blue border border-gray-700 transition-transform duration-700 delay-100 group-hover:[transform:translateZ(40px)]"
+                                className={`text-[10px] md:text-xs font-medium px-2.5 md:px-3 py-1.5 rounded-full bg-black-200 text-neon-blue border border-gray-700 transition-transform duration-700 delay-100 ${
+                                    isMobile 
+                                        ? (isFlipped ? '[transform:translateZ(40px)]' : '') 
+                                        : 'group-hover:[transform:translateZ(40px)]'
+                                }`}
                             >
                                 {tech}
                             </span>
@@ -68,7 +105,11 @@ const ProjectCard = ({ project }) => {
                             href={links.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 px-4 py-3 md:py-3 rounded-lg border border-gray-600 hover:border-neon-blue hover:text-neon-blue hover:bg-neon-blue/10 flex items-center justify-center gap-2 transition-transform duration-700 font-semibold group-hover:[transform:translateZ(50px)] delay-200 pointer-events-auto cursor-pointer relative z-50 text-sm md:text-base"
+                            className={`flex-1 px-4 py-3 md:py-3 rounded-lg border border-gray-600 hover:border-neon-blue hover:text-neon-blue hover:bg-neon-blue/10 flex items-center justify-center gap-2 transition-transform duration-700 font-semibold delay-200 pointer-events-auto cursor-pointer relative z-50 text-sm md:text-base ${
+                                isMobile 
+                                    ? (isFlipped ? '[transform:translateZ(50px)]' : '') 
+                                    : 'group-hover:[transform:translateZ(50px)]'
+                            }`}
                         >
                             <FaGithub size={18} /> Code
                         </a>
@@ -77,7 +118,11 @@ const ProjectCard = ({ project }) => {
                                 href={links.demo}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 px-4 py-3 md:py-3 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-primary font-bold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-neon-blue/30 transition-transform duration-700 group-hover:[transform:translateZ(50px)] delay-200 pointer-events-auto cursor-pointer relative z-50 text-sm md:text-base"
+                                className={`flex-1 px-4 py-3 md:py-3 rounded-lg bg-gradient-to-r from-neon-blue to-neon-purple text-primary font-bold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-neon-blue/30 transition-transform duration-700 delay-200 pointer-events-auto cursor-pointer relative z-50 text-sm md:text-base ${
+                                    isMobile 
+                                        ? (isFlipped ? '[transform:translateZ(50px)]' : '') 
+                                        : 'group-hover:[transform:translateZ(50px)]'
+                                }`}
                             >
                                 <FaExternalLinkAlt size={16} /> Live
                             </a>

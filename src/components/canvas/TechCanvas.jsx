@@ -27,8 +27,8 @@ const Laptop = ({ isMobile }) => {
             group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, 0.25 + Math.sin(scrollFactor) * 0.3, 0.1);
             group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, scrollFactor * 0.5, 0.1);
             group.current.rotation.z = THREE.MathUtils.lerp(group.current.rotation.z, Math.sin(scrollFactor * 0.5) * 0.1, 0.1);
-            // Move mobile laptop up significantly to center it in the smaller canvas
-            group.current.position.y = THREE.MathUtils.lerp(group.current.position.y, (3 + Math.sin(t)) / 5, 0.1);
+            // Position laptop slightly above center to clear buttons
+            group.current.position.y = THREE.MathUtils.lerp(group.current.position.y, (1 + Math.sin(t)) / 5, 0.1);
         } else {
             // Hover animation on desktop
             group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, Math.cos(t / 2) / 10 + 0.25, 0.1);
@@ -112,7 +112,7 @@ const TechCanvas = () => {
     }, []);
 
     return (
-        <div ref={ref} className={`w-full h-[400px] md:h-full ${isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}>
+        <div ref={ref} className={`w-full h-full ${isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}>
             {isInView && (
                 <Canvas
                     camera={{ position: [0, 0, isMobile ? 9 : 6], fov: isMobile ? 55 : 45 }}
