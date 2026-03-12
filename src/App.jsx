@@ -12,6 +12,8 @@ import Services from './components/Services'
 import Contact from './components/Contact'
 import SceneBackground from './components/canvas/SceneBackground'
 import CustomCursor from './components/ui/CustomCursor'
+import { SpeedInsights } from "@vercel/speed-insights/react"
+
 
 import { useEffect } from 'react'
 import Lenis from 'lenis'
@@ -40,6 +42,7 @@ function App() {
     <div className="text-gray-300 relative bg-transparent">
       <CustomCursor />
       <SceneBackground />
+      <SpeedInsights />
       <Navbar />
 
       <main className="relative z-10 w-full overflow-hidden">
