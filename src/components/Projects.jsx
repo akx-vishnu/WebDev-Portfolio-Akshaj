@@ -32,6 +32,16 @@ const Projects = () => {
         },
         {
             id: 3,
+            title: 'GK Fashion Jewellery',
+            description: 'A premium, high-performance e-commerce platform for artificial jewellery. Features automated WhatsApp quote generation, a secure Supabase-powered administrative dashboard, and a luxurious gold-themed mobile-optimized UI.',
+            techStack: ['Node.js', 'Express', 'Supabase', 'Vanilla JS', 'Vercel'],
+            links: {
+                github: 'https://github.com/akx-vishnu/Gk-Fashion-jewellery',
+                demo: 'https://gk-fashion-jewellery.vercel.app/',
+            },
+        },
+        {
+            id: 4,
             title: 'Rudra Travel Service',
             description: 'Professional corporate transport website with pages for services, safety, fleet & clients. WhatsApp inquiry integration, Google Maps embed, responsive design with SEO meta management.',
             techStack: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'Framer Motion'],
@@ -41,7 +51,7 @@ const Projects = () => {
             },
         },
         {
-            id: 4,
+            id: 5,
             title: 'LittleCloud Baby Wear',
             description: 'B2B digital showroom for a premium baby clothing brand. Real-time product search with auto-scroll, WhatsApp inquiry integration, fully configurable via TypeScript config file.',
             techStack: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS'],
@@ -51,7 +61,7 @@ const Projects = () => {
             },
         },
         {
-            id: 5,
+            id: 6,
             title: 'Personal Portfolio',
             description: 'Reactive personal portfolio with Hero, About, Skills, Projects, and Services sections. Contact form integrated with Google Sheets via Apps Script for real-time message collection.',
             techStack: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Google Apps Script'],
@@ -61,7 +71,7 @@ const Projects = () => {
             },
         },
         {
-            id: 6,
+            id: 7,
             title: 'Peepul Tree School',
             description: 'Modern nature-themed school website with lightbox gallery, testimonials, animated timeline, Google Maps integration, WhatsApp contact form, and full SEO with JSON-LD structured data.',
             techStack: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion', 'React Helmet'],
@@ -71,7 +81,7 @@ const Projects = () => {
             },
         },
         {
-            id: 7,
+            id: 8,
             title: 'AbsoluteMinds Library',
             description: 'Desktop library management system with full CRUD, user authentication, book circulation tracking, bulk CSV import/export, and auto database setup with a normalized 3-table MySQL schema.',
             techStack: ['Python', 'Tkinter', 'MySQL', 'PyMySQL', 'Pillow'],
@@ -80,7 +90,7 @@ const Projects = () => {
             },
         },
         {
-            id: 8,
+            id: 9,
             title: 'Movie2Reel',
             description: 'Python CLI tool that splits long videos into 9:16 vertical reels for TikTok/Reels/Shorts. Auto-overlays title, part number & branding. Batch organizes output into uploadable folders.',
             techStack: ['Python', 'FFmpeg', 'CLI Tool'],
@@ -89,7 +99,7 @@ const Projects = () => {
             },
         },
         {
-            id: 9,
+            id: 10,
             title: 'Text2Reel',
             description: 'Web app that converts custom text into short portrait MP4 videos (1080×1920) with smart text wrapping and dark aesthetic styling. Cloud-deployed on Render.',
             techStack: ['Flask', 'MoviePy', 'Pillow', 'Gunicorn', 'Render'],
