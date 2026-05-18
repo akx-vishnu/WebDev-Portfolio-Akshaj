@@ -7,7 +7,7 @@ PERSONAL INFORMATION
 Name:       Akshaj V Nair
 Location:   Kochi, India
 Phone:      +91 9496202179
-Email:      akx_vishnu@pm.me
+Email:      akshajvnair.dev@gmail.com
 LinkedIn:   linkedin.com/in/akx-vishnu
 GitHub:     github.com/akx-vishnu
 Portfolio:  akshajvnair.vercel.app/minimalist

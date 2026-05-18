@@ -32,7 +32,11 @@ const Certifications = () => {
         { issuer: "Coursera · Project", name: "Create an E-Commerce Store with Shopify", score: "Mar 2026", icon: "🛒", color: "text-blue-400" },
         { issuer: "Coursera · Project", name: "Create Charts & Dashboards — Microsoft Excel", score: "Mar 2026", icon: "📊", color: "text-blue-400" },
         { issuer: "Coursera · Project", name: "Create a Project Management Tracker — Excel", score: "Mar 2026", icon: "📅", color: "text-blue-400" },
-        { issuer: "Coursera · Project", name: "Basic Formulas and Functions — Microsoft Excel", score: "Mar 2026", icon: "🧮", color: "text-blue-400" }
+        { issuer: "Coursera · Project", name: "Basic Formulas and Functions — Microsoft Excel", score: "Mar 2026", icon: "🧮", color: "text-blue-400" },
+        { issuer: "SkillUp · Simplilearn", name: "Introduction to Cyber Security", score: "Feb 2022", icon: "🔐", color: "text-cyan-500" },
+        { issuer: "Google for Developers · TechLabs · ICT Academy of Kerala", name: "Tech Labs Initiative — Android with Compose", score: "Oct 2023", icon: "📱", color: "text-green-500" },
+        { issuer: "Google for Developers · TechLabs · ICT Academy of Kerala", name: "Tech Labs Initiative — Generative AI with Google Cloud", score: "Oct 2023", icon: "🤖", color: "text-blue-400" },
+        { issuer: "Google for Developers · TechLabs · ICT Academy of Kerala", name: "Tech Labs Initiative — Machine Learning with TensorFlow", score: "Oct 2023", icon: "🧠", color: "text-orange-500" }
     ];
 
     return (

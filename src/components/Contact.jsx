@@ -67,11 +67,11 @@ const Contact = () => {
                             </p>
 
                             <div className="flex flex-col gap-6">
-                                <a href="mailto:akx_vishnu@pm.me" className="flex items-center gap-4 hover:text-neon-blue duration-300 group">
+                                <a href="mailto:akshajvnair.dev@gmail.com" className="flex items-center gap-4 hover:text-neon-blue duration-300 group">
                                     <div className="bg-tertiary p-4 rounded-full group-hover:bg-neon-blue/20 group-hover:shadow-neon transition-all duration-300">
                                         <FaEnvelope size={20} />
                                     </div>
-                                    <span className="text-lg">akx_vishnu@pm.me</span>
+                                    <span className="text-lg">akshajvnair.dev@gmail.com</span>
                                 </a>
 
                                 <button 

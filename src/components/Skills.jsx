@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaJava, FaPython, FaWindowMaximize, FaDocker, FaGitAlt } from 'react-icons/fa';
-import { SiTailwindcss, SiFlutter, SiMysql, SiFlask, SiMicrosoftexcel, SiFastapi, SiMicrosoftword, SiMicrosoftpowerpoint, SiPostgresql, SiSqlite, SiNextdotjs, SiVite, SiFramer, SiVercel, SiNgrok, SiSocketdotio, SiRadixui, SiOpenai } from 'react-icons/si';
+import { SiTailwindcss, SiFlutter, SiMysql, SiFlask, SiMicrosoftexcel, SiFastapi, SiMicrosoftword, SiMicrosoftpowerpoint, SiPostgresql, SiSqlite, SiNextdotjs, SiVite, SiFramer, SiVercel, SiNgrok, SiSocketdotio, SiRadixui, SiOpenai, SiPrisma, SiRedis, SiCplusplus } from 'react-icons/si';
 import SkillSphere from './canvas/SkillSphere';
 import TiltCard from './ui/TiltCard';
 import MagneticButton from './ui/MagneticButton';
@@ -33,7 +33,10 @@ const Skills = () => {
         { id: 25, name: 'Cursor', icon: <span className="font-bold text-blue-400 text-3xl">CR</span> },
         { id: 26, name: 'Claude Code', icon: <span className="font-bold text-orange-400 text-3xl">CC</span> },
         { id: 27, name: 'GitHub Copilot', icon: <span className="font-bold text-white text-3xl">CP</span> },
-        { id: 28, name: 'Google Antigravity', icon: <span className="font-bold text-blue-500 text-3xl">GA</span> }
+        { id: 28, name: 'Google Antigravity', icon: <span className="font-bold text-blue-500 text-3xl">GA</span> },
+        { id: 29, name: 'Prisma', icon: <SiPrisma className="text-white" /> },
+        { id: 30, name: 'Redis', icon: <SiRedis className="text-red-500" /> },
+        { id: 31, name: 'C++', icon: <SiCplusplus className="text-blue-400" /> }
     ];
 
     return (

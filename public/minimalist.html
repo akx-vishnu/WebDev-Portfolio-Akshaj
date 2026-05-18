@@ -186,9 +186,15 @@
     }
 
     /* Disable cursor on touch or small screens */
-    @media (pointer: coarse), (max-width: 900px) {
-      .cursor { display: none !important; }
-      body { cursor: auto !important; }
+    @media (pointer: coarse),
+    (max-width: 900px) {
+      .cursor {
+        display: none !important;
+      }
+
+      body {
+        cursor: auto !important;
+      }
     }
 
     #hero {
@@ -1036,14 +1042,56 @@
       .hamburger {
         display: flex;
       }
+
       .nav-badge {
         display: none;
       }
+
       .hero-title {
         font-size: clamp(2.5rem, 12vw, 5rem);
         text-align: center;
       }
     }
+
+  /* ── Scroll-to-top button ── */
+  #scroll-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: var(--black);
+    color: var(--lime);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease, bottom 0.15s ease;
+  }
+
+  #scroll-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  #scroll-top-btn:hover {
+    background: var(--lime);
+    color: var(--black);
+    transform: translateY(-4px);
+  }
+
+  #scroll-top-btn svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
   </style>
 </head>
 
@@ -1084,10 +1132,11 @@
         <div class="line2">V NAIR</div>
       </h1>
       <div class="hero-right">
-        <p class="hero-desc">AI-Native Full Stack Developer crafting scalable web systems — from AI-powered food analysis to
+        <p class="hero-desc">AI-Native Full Stack Developer crafting scalable web systems — from AI-powered food
+          analysis to
           real-time fleet management. React, Python, and everything in between.</p>
         <div class="hero-ctas">
-          <a href="#projects" class="btn btn-fill">View Work ↗</a>
+          <a href="Resume - Akshaj V Nair.pdf" target="_blank" class="btn btn-fill" onclick="const a = document.createElement('a'); a.href = this.href; a.download = 'Resume - Akshaj V Nair.pdf'; document.body.appendChild(a); a.click(); document.body.removeChild(a);">View Resume ↗</a>
           <a href="#contact" class="btn">Say Hello</a>
         </div>
       </div>
@@ -1098,7 +1147,7 @@
         <div class="stat-l">Projects<br />Shipped</div>
       </div>
       <div class="stat">
-        <div class="stat-n">29</div>
+        <div class="stat-n">33</div>
         <div class="stat-l">Certifications<br />Earned</div>
       </div>
       <div class="stat">
@@ -1191,7 +1240,8 @@
             Kochi, Kerala. WhatsApp cart ordering, 25 products across 5 categories, smart shop with search &amp; price
             filter, and a mobile-first responsive UI.</p>
           <div class="project-tags"><span class="tag">React 19</span><span class="tag">Vite</span><span
-              class="tag">Tailwind CSS v4</span><span class="tag">React Router v7</span><span class="tag">Lucide React</span></div>
+              class="tag">Tailwind CSS v4</span><span class="tag">React Router v7</span><span class="tag">Lucide
+              React</span></div>
         </div>
         <div class="project-side"><span></span><span class="project-arrow">&#8594;</span></div>
       </div>
@@ -1209,8 +1259,7 @@
         </div>
         <div class="project-side"><span></span><span class="project-arrow">&#8594;</span></div>
       </div>
-      <div class="project-row reveal"
-        onclick="window.open('https://littlecloud-clothingbrand.vercel.app/','_blank')"
+      <div class="project-row reveal" onclick="window.open('https://littlecloud-clothingbrand.vercel.app/','_blank')"
         title="View Live Site: LittleCloud Baby Wear" style="cursor:pointer">
         <div class="project-idx">06 <span style="font-size:10px;color:var(--mid)">2024</span></div>
         <div class="project-main">
@@ -1227,9 +1276,11 @@
         <div class="project-idx">07</div>
         <div class="project-main">
           <div class="project-name">Personal Portfolio</div>
-          <p class="project-desc">Reactive personal portfolio with Hero, About, Skills, Projects, and Services sections. Contact form integrated with WhatsApp for real-time inquiry handling.</p>
+          <p class="project-desc">Reactive personal portfolio with Hero, About, Skills, Projects, and Services sections.
+            Contact form integrated with WhatsApp for real-time inquiry handling.</p>
           <div class="project-tags"><span class="tag">React</span><span class="tag">Vite</span><span
-              class="tag">Tailwind CSS</span><span class="tag">Framer Motion</span><span class="tag">WhatsApp Integration</span></div>
+              class="tag">Tailwind CSS</span><span class="tag">Framer Motion</span><span class="tag">WhatsApp
+              Integration</span></div>
         </div>
         <div class="project-side"><span></span><span class="project-arrow">&#8594;</span></div>
       </div>
@@ -1351,7 +1402,7 @@
         <div class="skill-panel active" id="panel-langs">
           <div class="skill-chips"><span class="skill-chip">Python</span><span class="skill-chip">JavaScript</span><span
               class="skill-chip">TypeScript</span><span class="skill-chip">Java</span><span
-              class="skill-chip">Kotlin</span><span class="skill-chip">HTML5</span><span class="skill-chip">CSS3</span>
+              class="skill-chip">Kotlin</span><span class="skill-chip">HTML5</span><span class="skill-chip">CSS3</span><span class="skill-chip">C++</span>
           </div>
         </div>
         <div class="skill-panel" id="panel-frontend">
@@ -1367,7 +1418,7 @@
         <div class="skill-panel" id="panel-db">
           <div class="skill-chips"><span class="skill-chip">PostgreSQL</span><span class="skill-chip">MySQL</span><span
               class="skill-chip">SQLite</span><span class="skill-chip">SQLAlchemy</span><span class="skill-chip">Drizzle
-              ORM</span><span class="skill-chip">Redis</span></div>
+              ORM</span><span class="skill-chip">Prisma</span><span class="skill-chip">Redis</span></div>
         </div>
         <div class="skill-panel" id="panel-ai">
           <div class="skill-chips"><span class="skill-chip">Groq / Llama-3</span><span class="skill-chip">Tesseract
@@ -1377,7 +1428,9 @@
         <div class="skill-panel" id="panel-tools">
           <div class="skill-chips"><span class="skill-chip">Git</span><span class="skill-chip">GitHub</span><span
               class="skill-chip">Docker</span><span class="skill-chip">Vercel</span><span
-              class="skill-chip">Render</span><span class="skill-chip">Cursor</span><span class="skill-chip">Claude Code</span><span class="skill-chip">GitHub Copilot</span><span class="skill-chip">Google Antigravity</span></div>
+              class="skill-chip">Render</span><span class="skill-chip">Cursor</span><span class="skill-chip">Claude
+              Code</span><span class="skill-chip">GitHub Copilot</span><span class="skill-chip">Google
+              Antigravity</span></div>
         </div>
         <div class="skill-panel" id="panel-mobile">
           <div class="skill-chips"><span class="skill-chip">Flutter</span><span class="skill-chip">React
@@ -1396,8 +1449,9 @@
       <div class="edu-card reveal">
         <div class="edu-year">2023 - 2026</div>
         <div class="edu-degree">B.Sc. Computer Science</div>
-        <div class="edu-school">Yuvakshetra Institute of Management Studies, Palakkad (NAAC A) · University of Calicut</div>
-        <span class="edu-score">CGPA: 7.2</span>
+        <div class="edu-school">Yuvakshetra Institute of Management Studies, Palakkad (NAAC A) · University of Calicut
+        </div>
+        <span class="edu-score">CGPA: 6.87</span>
       </div>
       <div class="edu-card reveal">
         <div class="edu-year">Class XII · CBSE · 2023</div>
@@ -1520,83 +1574,107 @@
         <div class="cert-name">Paper Presenter - EcoScan AI</div>
         <div class="cert-score">Jan 2026</div>
       </div>
-<!-- IBM Course Certificates - cert-top -->
-<div class="cert-card cert-top reveal">
-  <div class="cert-issuer">IBM · Coursera</div>
-  <div class="cert-name">Introduction to Software Engineering</div>
-  <div class="cert-score">Jun 2025</div>
-</div>
-<div class="cert-card cert-top reveal">
-  <div class="cert-issuer">IBM · Coursera</div>
-  <div class="cert-name">Python for Data Science, AI &amp; Development</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
-<div class="cert-card cert-top reveal">
-  <div class="cert-issuer">IBM · Coursera</div>
-  <div class="cert-name">Generative AI: Prompt Engineering Basics</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
-<div class="cert-card cert-top reveal">
-  <div class="cert-issuer">IBM · Credly</div>
-  <div class="cert-name">Generative AI: Prompt Engineering</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
-<div class="cert-card cert-top reveal">
-  <div class="cert-issuer">IBM · Credly</div>
-  <div class="cert-name">Python for Data Science and AI</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
+      <!-- IBM Course Certificates - cert-top -->
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">IBM · Coursera</div>
+        <div class="cert-name">Introduction to Software Engineering</div>
+        <div class="cert-score">Jun 2025</div>
+      </div>
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">IBM · Coursera</div>
+        <div class="cert-name">Python for Data Science, AI &amp; Development</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">IBM · Coursera</div>
+        <div class="cert-name">Generative AI: Prompt Engineering Basics</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">IBM · Credly</div>
+        <div class="cert-name">Generative AI: Prompt Engineering</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">IBM · Credly</div>
+        <div class="cert-name">Python for Data Science and AI</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
 
-<!-- Google Course Certificates - cert-top -->
-<div class="cert-card cert-top reveal">
-  <div class="cert-issuer">Google · Coursera</div>
-  <div class="cert-name">Introduction to AI</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
-<div class="cert-card cert-top reveal">
-  <div class="cert-issuer">Google · Coursera</div>
-  <div class="cert-name">Accelerate Your Job Search with AI</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
+      <!-- Google Course Certificates - cert-top -->
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">Google · Coursera</div>
+        <div class="cert-name">Introduction to AI</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">Google · Coursera</div>
+        <div class="cert-name">Accelerate Your Job Search with AI</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
 
-<!-- Coursera Course Certificate -->
-<div class="cert-card reveal">
-  <div class="cert-issuer">Coursera</div>
-  <div class="cert-name">Generative AI and Large Language Models</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
+      <!-- Coursera Course Certificate -->
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Coursera</div>
+        <div class="cert-name">Generative AI and Large Language Models</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
 
-<!-- Coursera Project Certificates -->
-<div class="cert-card reveal">
-  <div class="cert-issuer">Coursera · Project</div>
-  <div class="cert-name">Google Ads for Beginners</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
-<div class="cert-card reveal">
-  <div class="cert-issuer">Coursera · Project</div>
-  <div class="cert-name">SEO with Squarespace</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
-<div class="cert-card reveal">
-  <div class="cert-issuer">Coursera · Project</div>
-  <div class="cert-name">Create an E-Commerce Store with Shopify</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
-<div class="cert-card reveal">
-  <div class="cert-issuer">Coursera · Project</div>
-  <div class="cert-name">Create Charts &amp; Dashboards — Microsoft Excel</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
-<div class="cert-card reveal">
-  <div class="cert-issuer">Coursera · Project</div>
-  <div class="cert-name">Create a Project Management Tracker — Excel</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
-<div class="cert-card reveal">
-  <div class="cert-issuer">Coursera · Project</div>
-  <div class="cert-name">Basic Formulas and Functions — Microsoft Excel</div>
-  <div class="cert-score">Mar 2026</div>
-</div>
+      <!-- Coursera Project Certificates -->
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Coursera · Project</div>
+        <div class="cert-name">Google Ads for Beginners</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Coursera · Project</div>
+        <div class="cert-name">SEO with Squarespace</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Coursera · Project</div>
+        <div class="cert-name">Create an E-Commerce Store with Shopify</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Coursera · Project</div>
+        <div class="cert-name">Create Charts &amp; Dashboards — Microsoft Excel</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Coursera · Project</div>
+        <div class="cert-name">Create a Project Management Tracker — Excel</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-issuer">Coursera · Project</div>
+        <div class="cert-name">Basic Formulas and Functions — Microsoft Excel</div>
+        <div class="cert-score">Mar 2026</div>
+      </div>
+
+      <!-- SkillUp by Simplilearn -->
+      <div class="cert-card reveal">
+        <div class="cert-issuer">SkillUp · Simplilearn</div>
+        <div class="cert-name">Introduction to Cyber Security</div>
+        <div class="cert-score">Feb 2022 · Code: 3217749</div>
+      </div>
+
+      <!-- Google for Developers TechLabs Certs -->
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">Google for Developers · TechLabs · ICT Academy of Kerala</div>
+        <div class="cert-name">Tech Labs Initiative — Android with Compose</div>
+        <div class="cert-score">Oct 2023</div>
+      </div>
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">Google for Developers · TechLabs · ICT Academy of Kerala</div>
+        <div class="cert-name">Tech Labs Initiative — Generative AI with Google Cloud</div>
+        <div class="cert-score">Oct 2023</div>
+      </div>
+      <div class="cert-card cert-top reveal">
+        <div class="cert-issuer">Google for Developers · TechLabs · ICT Academy of Kerala</div>
+        <div class="cert-name">Tech Labs Initiative — Machine Learning with TensorFlow</div>
+        <div class="cert-score">Oct 2023</div>
+      </div>
     </div>
   </section>
 
@@ -1613,9 +1691,9 @@
             projects, and interesting collaborations. Drop me a line.</p>
         </div>
         <div class="contact-info">
-          <a href="mailto:akx_vishnu@pm.me" class="contact-row">
+          <a href="mailto:akshajvnair.dev@gmail.com" class="contact-row">
             <div>
-              <div class="contact-row-label">Email</div>akx_vishnu@pm.me
+              <div class="contact-row-label">Email</div>akshajvnair.dev@gmail.com
             </div><span>&#8599;</span>
           </a>
           <a href="tel:+919496202179" class="contact-row">
@@ -1660,14 +1738,19 @@
     <span>© 2026 All rights reserved</span>
   </footer>
 
+  <!-- Scroll to Top Button -->
+  <button id="scroll-top-btn" aria-label="Scroll to top" title="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
   <script>
     const cursor = document.getElementById('cursor');
     const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-    
+
     if (!isTouch && window.innerWidth > 900) {
-      document.addEventListener('mousemove', e => { 
-        cursor.style.left = e.clientX + 'px'; 
-        cursor.style.top = e.clientY + 'px'; 
+      document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
       });
     } else {
       cursor.style.display = 'none';
@@ -1713,6 +1796,35 @@
       const message = document.getElementById('message').value;
       window.open('https://wa.me/919496202179?text=' + encodeURIComponent('Hi Akshaj,\n\nName: ' + name + '\nEmail: ' + email + '\n\n' + message), '_blank');
     }
+
+    /* ── Scroll-to-top logic ── */
+    const scrollTopBtn = document.getElementById('scroll-top-btn');
+    const siteFooter = document.querySelector('footer');
+    const GAP = 16; /* px gap above footer */
+
+    function updateScrollBtn() {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+
+      /* Lift button above footer when footer enters viewport */
+      const footerRect = siteFooter.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+      const footerVisible = viewportH - footerRect.top; /* px of footer showing */
+
+      if (footerVisible > 0) {
+        scrollTopBtn.style.bottom = (footerVisible + GAP) + 'px';
+      } else {
+        scrollTopBtn.style.bottom = '2rem';
+      }
+    }
+
+    window.addEventListener('scroll', updateScrollBtn, { passive: true });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 </body>
 

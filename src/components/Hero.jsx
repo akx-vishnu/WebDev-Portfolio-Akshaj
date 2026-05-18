@@ -58,7 +58,7 @@ const Hero = () => {
                                 <span className="text-xs text-gray-400 uppercase tracking-widest font-mono">Projects</span>
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-3xl font-bold text-white">29</span>
+                                <span className="text-3xl font-bold text-white">33</span>
                                 <span className="text-xs text-gray-400 uppercase tracking-widest font-mono">Certs</span>
                             </div>
                             <div className="flex flex-col">
