@@ -12,6 +12,17 @@ gsap.registerPlugin(ScrollTrigger);
 const Projects = () => {
     const projects = [
         {
+            id: 12,
+            title: 'QutyMom',
+            description: 'Premium export-quality organic cotton baby clothing brand website. Built with Astro v6 for fast static-site generation. Features Web3Forms for direct email inquiries, WhatsApp integration, and a comprehensive SEO implementation.',
+            techStack: ['Astro v6', 'Tailwind CSS', 'TypeScript', 'Web3Forms'],
+            links: {
+                github: 'https://github.com/akx-vishnu/qutymom',
+                demo: 'https://qutymom.com',
+            },
+            featured: true,
+        },
+        {
             id: 1,
             title: 'EcoScan AI',
             description: 'AI-powered food label analysis platform using Tesseract OCR and Groq Llama-3. Generates personalized health scores, eco impact ratings, and chatbot Q&A. Microservice architecture with FastAPI for OCR and Flask for main app logic. Presented at MESKCON International Conference 2026.',
