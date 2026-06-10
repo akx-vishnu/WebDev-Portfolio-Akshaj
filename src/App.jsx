@@ -1,3 +1,5 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
@@ -14,13 +16,15 @@ import SceneBackground from './components/canvas/SceneBackground'
 import CustomCursor from './components/ui/CustomCursor'
 import { SpeedInsights } from "@vercel/speed-insights/react"
 
+// Profile page — no link from portfolio, personal use only
+import Profile from './pages/Profile'
 
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-function App() {
+function PortfolioApp() {
   useEffect(() => {
     const lenis = new Lenis()
 
@@ -40,7 +44,7 @@ function App() {
 
   return (
     <div className="text-gray-300 relative bg-transparent">
-      <CustomCursor />
+      {/* CustomCursor is now at App level to cover all routes */}
       <SceneBackground />
       <SpeedInsights />
       <Navbar />
@@ -78,27 +82,25 @@ function App() {
         <section id="contact">
           <Contact />
         </section>
-
-        {/* Placeholders for other sections to allow scrolling testing */}
-        {/* <section id="about" className="h-screen flex items-center justify-center border-t border-gray-800">
-          <h2 className="text-4xl">About Section</h2>
-        </section>
-        <section id="skills" className="h-screen flex items-center justify-center border-t border-gray-800">
-          <h2 className="text-4xl">Skills Section</h2>
-        </section>
-        <section id="projects" className="h-screen flex items-center justify-center border-t border-gray-800">
-          <h2 className="text-4xl">Projects Section</h2>
-        </section>
-        <section id="services" className="h-screen flex items-center justify-center border-t border-gray-800">
-          <h2 className="text-4xl">Services Section</h2>
-        </section>
-        <section id="contact" className="h-screen flex items-center justify-center border-t border-gray-800">
-          <h2 className="text-4xl">Contact Section</h2>
-        </section> */}
       </main>
 
       <Footer />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <CustomCursor />
+      <Routes>
+        {/* Personal profile page — not linked from portfolio */}
+        <Route path="/profile" element={<Profile />} />
+
+        {/* Main portfolio */}
+        <Route path="/*" element={<PortfolioApp />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
