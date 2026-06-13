@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
-const FloatingShapes = ({ count = 50 }) => {
+const FloatingShapes = ({ count = 25 }) => {
     const mesh = useRef();
 
     // Create random positions and shapes
@@ -47,7 +47,11 @@ const Services3D = () => {
     return (
         <div ref={ref} className="absolute inset-0 z-0 w-full h-full pointer-events-none">
             {isInView && (
-                <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
+                <Canvas
+                    camera={{ position: [0, 0, 10], fov: 50 }}
+                    gl={{ antialias: false, powerPreference: 'high-performance', alpha: true }}
+                    dpr={[1, 1.5]}
+                >
                     <ambientLight intensity={0.5} />
                     <pointLight position={[10, 10, 10]} intensity={0.5} />
                     <FloatingShapes />

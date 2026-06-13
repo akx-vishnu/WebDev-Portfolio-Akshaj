@@ -44,6 +44,7 @@ const Contact = () => {
                     <motion.h2
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                         className="text-4xl font-bold inline border-b-4 border-neon-purple text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple"
                     >
@@ -55,6 +56,7 @@ const Contact = () => {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                     className="flex flex-col md:flex-row gap-10 justify-center items-start"
                 >

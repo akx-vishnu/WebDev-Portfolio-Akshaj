@@ -59,6 +59,7 @@ const Experience = () => {
                     <motion.h2
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                         className="text-4xl font-bold inline border-b-4 border-neon-blue text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple uppercase tracking-wider"
                     >

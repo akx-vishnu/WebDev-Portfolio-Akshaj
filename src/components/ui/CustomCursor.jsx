@@ -7,6 +7,7 @@ const CustomCursor = () => {
   const [targetRect, setTargetRect] = useState(null);
   
   const hoverElRef = useRef(null);
+  const scrollRafRef = useRef(null);
 
   // Core cursor position (the inner dot)
   const cursorX = useMotionValue(-100);
@@ -64,17 +65,11 @@ const CustomCursor = () => {
 
     const handleMouseOver = (e) => {
       const target = e.target;
-      const computedStyle = window.getComputedStyle(target);
-      
-      // Look for a close clickable container
-      const el = target.closest("a") || target.closest("button") || 
-                 (computedStyle.cursor === "pointer" ? target : null) ||
-                 (target.classList.contains("magnetic") ? target : null);
+      // Fast path: check closest clickable ancestor BEFORE touching computed styles
+      const el = target.closest('a, button, [role="button"], .magnetic');
 
-      if (el && window.getComputedStyle(el).cursor !== "none") {
+      if (el) {
         hoverElRef.current = el;
-        
-        // Slight timeout allows CSS transitions on the element to start before calculating bounds
         setTimeout(() => {
           if (hoverElRef.current === el) {
             setTargetRect(el.getBoundingClientRect());
@@ -89,9 +84,14 @@ const CustomCursor = () => {
     };
 
     const handleScroll = () => {
-      if (hoverElRef.current) {
-        setTargetRect(hoverElRef.current.getBoundingClientRect());
-      }
+      // Throttle with rAF — avoids getBoundingClientRect on every scroll tick
+      if (scrollRafRef.current) return;
+      scrollRafRef.current = requestAnimationFrame(() => {
+        if (hoverElRef.current) {
+          setTargetRect(hoverElRef.current.getBoundingClientRect());
+        }
+        scrollRafRef.current = null;
+      });
     };
 
     const handleMouseLeave = () => setIsHidden(true);

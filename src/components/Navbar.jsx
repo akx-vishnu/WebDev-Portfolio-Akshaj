@@ -8,16 +8,19 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
+        let rafId = null;
         const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
+            if (rafId) return; // already scheduled
+            rafId = requestAnimationFrame(() => {
+                setScrolled(window.scrollY > 50);
+                rafId = null;
+            });
         };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (rafId) cancelAnimationFrame(rafId);
+        };
     }, []);
 
     const links = [

@@ -5,8 +5,8 @@ import * as random from 'maath/random/dist/maath-random.esm';
 
 const TechParticles = (props) => {
     const ref = useRef();
-    // Generate particles in a box shape instead of a sphere for a "digital field" look
-    const sphere = random.inBox(new Float32Array(3000), { sides: [4, 4, 4] });
+    // Reduced from 3000 to 1500 particles — still looks great, half the GPU cost
+    const sphere = random.inBox(new Float32Array(1500), { sides: [4, 4, 4] });
 
     useFrame((state, delta) => {
         ref.current.rotation.x -= delta / 15;
@@ -35,11 +35,11 @@ const ConnectingLines = () => {
     // we can use a few floating geometric wireframes.
     return (
         <group>
-            {[...Array(5)].map((_, i) => (
-                <Float key={i} speed={1 + i * 0.5} rotationIntensity={2} floatIntensity={2}>
+            {[...Array(4)].map((_, i) => (
+                <Float key={i} speed={0.8 + i * 0.3} rotationIntensity={1} floatIntensity={1}>
                     <mesh position={[Math.random() * 4 - 2, Math.random() * 4 - 2, Math.random() * 2 - 1]}>
                         <icosahedronGeometry args={[0.5 + Math.random() * 0.5, 0]} />
-                        <meshBasicMaterial color="#bc13fe" wireframe transparent opacity={0.3} />
+                        <meshBasicMaterial color="#bc13fe" wireframe transparent opacity={0.25} />
                     </mesh>
                 </Float>
             ))}
@@ -56,7 +56,11 @@ const About3D = () => {
     return (
         <div ref={ref} className="absolute inset-0 z-0 opacity-40 pointer-events-none">
             {isInView && (
-                <Canvas camera={{ position: [0, 0, 5] }}>
+                <Canvas
+                    camera={{ position: [0, 0, 5] }}
+                    gl={{ antialias: false, powerPreference: 'high-performance', alpha: true }}
+                    dpr={[1, 1.5]}
+                >
                     <ambientLight intensity={0.5} />
                     <TechParticles />
                     <ConnectingLines />

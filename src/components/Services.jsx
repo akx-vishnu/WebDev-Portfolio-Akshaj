@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaLaptopCode, FaBusinessTime, FaUniversity, FaUserTie, FaCalendarAlt, FaBoxOpen, FaProjectDiagram, FaCode } from 'react-icons/fa';
+import { FaLaptopCode, FaBusinessTime, FaUniversity, FaUserTie, FaCalendarAlt, FaBoxOpen, FaProjectDiagram, FaCode, FaTerminal, FaAndroid, FaCloud } from 'react-icons/fa';
+import { SiFlutter } from 'react-icons/si';
 import Services3D from './canvas/Services3D';
 
 const Services = () => {
@@ -12,10 +13,34 @@ const Services = () => {
             description: 'End-to-end web applications built with modern stacks (MERN/PERN), focusing on scalable architecture, secure APIs, and seamless database integration.',
         },
         {
+            id: 8,
+            title: 'Software Development',
+            icon: <FaTerminal size={40} className="text-neon-blue" />,
+            description: 'Custom desktop applications, command-line utilities, automation scripts, and background services engineered to solve business logic challenges and optimize performance.',
+        },
+        {
+            id: 9,
+            title: 'SaaS & Web Applications',
+            icon: <FaCloud size={40} className="text-neon-blue" />,
+            description: 'Scalable software-as-a-service platforms and cloud-hosted web apps built for high reliability, user management, and seamless API integrations.',
+        },
+        {
+            id: 10,
+            title: 'Android App Development',
+            icon: <FaAndroid size={40} className="text-green-500" />,
+            description: 'Native and robust Android mobile applications tailored with responsive design, secure offline storage, and modern API integrations.',
+        },
+        {
+            id: 11,
+            title: 'Flutter App Development',
+            icon: <SiFlutter size={40} className="text-cyan-400" />,
+            description: 'Stunning cross-platform mobile apps for iOS and Android compiled from a single codebase using Flutter for native performance and custom UIs.',
+        },
+        {
             id: 1,
             title: 'Landing Pages',
             icon: <FaLaptopCode size={40} className="text-neon-blue" />,
-            description: 'High-converting, fast-loading landing pages built with React and Tailwind CSS to maximize your marketing campaigns.',
+            description: 'High-converting, fast-loading landing pages built with Astro, React, and Tailwind CSS, highly focused on SEO optimization to maximize rankings and campaigns.',
         },
         {
             id: 2,

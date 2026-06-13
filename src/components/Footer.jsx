@@ -12,6 +12,7 @@ const Footer = () => {
         <motion.footer
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 1 }}
             className="bg-black-200 text-white py-8 border-t border-gray-800"
         >

@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 const TiltCard = ({ children, className }) => {
     const ref = useRef(null);
+    const rafRef = useRef(null);
 
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -13,23 +14,33 @@ const TiltCard = ({ children, className }) => {
     const rotateX = useTransform(mouseY, [-0.5, 0.5], ["15deg", "-15deg"]);
     const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-15deg", "15deg"]);
 
-    const handleMouseMove = (e) => {
-        const rect = ref.current.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseXFromCenter = e.clientX - rect.left - width / 2;
-        const mouseYFromCenter = e.clientY - rect.top - height / 2;
-        const xPct = mouseXFromCenter / width;
-        const yPct = mouseYFromCenter / height;
+    // Cache the bounding rect and only refresh it on first hover
+    const rectCache = useRef(null);
 
-        x.set(xPct);
-        y.set(yPct);
-    };
+    const handleMouseMove = useCallback((e) => {
+        // Throttle with rAF — avoids layout thrash on every mousemove
+        if (rafRef.current) return;
+        rafRef.current = requestAnimationFrame(() => {
+            if (!ref.current) { rafRef.current = null; return; }
+            // Only call getBoundingClientRect once per hover session
+            if (!rectCache.current) {
+                rectCache.current = ref.current.getBoundingClientRect();
+            }
+            const rect = rectCache.current;
+            const xPct = (e.clientX - rect.left - rect.width / 2) / rect.width;
+            const yPct = (e.clientY - rect.top - rect.height / 2) / rect.height;
+            x.set(xPct);
+            y.set(yPct);
+            rafRef.current = null;
+        });
+    }, [x, y]);
 
-    const handleMouseLeave = () => {
+    const handleMouseLeave = useCallback(() => {
+        rectCache.current = null; // invalidate cache on leave
+        if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
         x.set(0);
         y.set(0);
-    };
+    }, [x, y]);
 
     return (
         <motion.div

@@ -49,6 +49,7 @@ const Certifications = () => {
                     <motion.h2
                         initial={{ opacity: 0, y: -20 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                         className="text-4xl font-bold inline border-b-4 border-neon-purple text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-blue uppercase tracking-wider"
                     >
@@ -63,8 +64,8 @@ const Certifications = () => {
                             key={index}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.4, delay: index * 0.05 }}
-                            viewport={{ once: true }}
+                            transition={{ duration: 0.25, delay: index * 0.02 }}
+                            viewport={{ once: true }}  
                         >
                             <TiltCard className="glass-card p-6 h-full border border-gray-700/50 hover:border-neon-purple/40 transition-all duration-300 cursor-default group">
                                 <div className="flex items-start gap-4 h-full">
@@ -82,6 +83,7 @@ const Certifications = () => {
                                                     <motion.div 
                                                         initial={{ width: 0 }}
                                                         whileInView={{ width: cert.score }}
+                                                        viewport={{ once: true }}
                                                         transition={{ duration: 1, delay: 0.5 }}
                                                         className="bg-neon-purple h-full shadow-[0_0_8px_#6e3bff]"
                                                     />

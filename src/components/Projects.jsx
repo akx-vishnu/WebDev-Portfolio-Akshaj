@@ -140,7 +140,16 @@ const Projects = () => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
         window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        
+        // Refresh ScrollTrigger after a short delay to ensure lazy loaded components are accounted for
+        const timer = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 500);
+
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            clearTimeout(timer);
+        };
     }, []);
 
     useGSAP(() => {
@@ -155,7 +164,7 @@ const Projects = () => {
             x: () => -totalScroll,
             ease: "none",
             scrollTrigger: {
-                trigger: containerRef.current,
+                trigger: containerRef.current.parentNode || containerRef.current,
                 pin: true,
                 scrub: 1,
                 onUpdate: (self) => {

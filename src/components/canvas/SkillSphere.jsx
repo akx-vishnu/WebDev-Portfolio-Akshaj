@@ -1,84 +1,107 @@
-import React, { useRef, useState, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Html, OrbitControls } from '@react-three/drei';
-import * as THREE from 'three';
+import { useEffect, useRef } from 'react';
 
-const SkillNode = ({ position, children }) => {
-    return (
-        <group position={position}>
-            <Html transform distanceFactor={5}>
-                <div className="w-20 h-20 flex items-center justify-center bg-tertiary/80 backdrop-blur-sm rounded-full border border-neon-blue/30 shadow-neon hover:scale-110 duration-300 p-4">
-                    {children}
-                </div>
-            </Html>
-        </group>
-    );
-};
+/**
+ * Pure CSS 3D rotating skill sphere — zero WebGL cost.
+ * Uses perspective + transform-style: preserve-3d to distribute
+ * skill icons on the surface of a sphere using the Fibonacci lattice method.
+ */
+const SkillSphere = ({ skills }) => {
+    const sphereRef = useRef(null);
+    const rafRef = useRef(null);
+    const angleRef = useRef({ y: 0, x: 10 }); // degrees
+    const isDragging = useRef(false);
+    const lastMouse = useRef({ x: 0, y: 0 });
 
-const RotatingSphere = ({ skills }) => {
-    const groupRef = useRef();
+    const RADIUS = 160; // px — sphere radius
 
-    // Distribute points on a sphere
-    const points = useMemo(() => {
-        const p = [];
+    // Fibonacci lattice: distributes N points uniformly on a sphere surface
+    const spherePoints = skills.map((skill, i) => {
         const phi = Math.PI * (3 - Math.sqrt(5)); // golden angle
-        for (let i = 0; i < skills.length; i++) {
-            const y = 1 - (i / (skills.length - 1)) * 2; // y goes from 1 to -1
-            const radius = Math.sqrt(1 - y * y);
-            const theta = phi * i;
-            const x = Math.cos(theta) * radius;
-            const z = Math.sin(theta) * radius;
-            // Scale by radius of the sphere
-            const R = 3.5;
-            p.push(new THREE.Vector3(x * R, y * R, z * R));
-        }
-        return p;
-    }, [skills]);
-
-    useFrame((state, delta) => {
-        if (groupRef.current) {
-            groupRef.current.rotation.y += delta * 0.2;
-            groupRef.current.rotation.x += delta * 0.15;
-        }
+        const y = 1 - (i / (skills.length - 1)) * 2;
+        const radius = Math.sqrt(1 - y * y);
+        const theta = phi * i;
+        return {
+            x: Math.cos(theta) * radius * RADIUS,
+            y: y * RADIUS,
+            z: Math.sin(theta) * radius * RADIUS,
+            skill,
+        };
     });
 
+    useEffect(() => {
+        const sphere = sphereRef.current;
+        if (!sphere) return;
+
+        const animate = () => {
+            angleRef.current.y += 0.25; // degrees per frame
+            sphere.style.transform = `rotateX(${angleRef.current.x}deg) rotateY(${angleRef.current.y}deg)`;
+            rafRef.current = requestAnimationFrame(animate);
+        };
+
+        rafRef.current = requestAnimationFrame(animate);
+
+        // Drag to rotate
+        const onMouseDown = (e) => {
+            isDragging.current = true;
+            lastMouse.current = { x: e.clientX, y: e.clientY };
+        };
+        const onMouseMove = (e) => {
+            if (!isDragging.current) return;
+            const dx = e.clientX - lastMouse.current.x;
+            const dy = e.clientY - lastMouse.current.y;
+            angleRef.current.y += dx * 0.4;
+            angleRef.current.x -= dy * 0.4;
+            lastMouse.current = { x: e.clientX, y: e.clientY };
+        };
+        const onMouseUp = () => { isDragging.current = false; };
+
+        sphere.parentElement?.addEventListener('mousedown', onMouseDown);
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+
+        return () => {
+            cancelAnimationFrame(rafRef.current);
+            sphere.parentElement?.removeEventListener('mousedown', onMouseDown);
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseup', onMouseUp);
+        };
+    }, []);
+
     return (
-        <group ref={groupRef}>
-            {skills.map((skill, i) => (
-                <SkillNode key={skill.id} position={points[i]}>
-                    <div className="text-4xl text-white drop-shadow-lg">
-                        {skill.icon}
+        <div
+            className="w-full h-full min-h-[500px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none"
+            style={{ perspective: '800px' }}
+        >
+            <div
+                ref={sphereRef}
+                style={{
+                    position: 'relative',
+                    width: 0,
+                    height: 0,
+                    transformStyle: 'preserve-3d',
+                    willChange: 'transform',
+                }}
+            >
+                {spherePoints.map(({ x, y, z, skill }) => (
+                    <div
+                        key={skill.id}
+                        style={{
+                            position: 'absolute',
+                            transform: `translate3d(${x}px, ${y}px, ${z}px)`,
+                            transformStyle: 'preserve-3d',
+                        }}
+                    >
+                        {/* Auto-face-camera billboard trick */}
+                        <div
+                            style={{ transform: 'translateZ(0)' }}
+                            className="w-16 h-16 flex flex-col items-center justify-center bg-gray-900/80 backdrop-blur-sm rounded-full border border-cyan-400/30 shadow-[0_0_10px_rgba(0,243,255,0.15)] hover:scale-110 transition-transform duration-200 p-2"
+                        >
+                            <div className="text-2xl leading-none">{skill.icon}</div>
+                            <span className="text-[8px] text-gray-400 mt-1 font-mono text-center leading-tight truncate w-full text-center">{skill.name}</span>
+                        </div>
                     </div>
-                    {/* Optional label if needed, but icon is cleaner */}
-                </SkillNode>
-            ))}
-        </group>
-    );
-};
-
-import { useInView } from 'framer-motion';
-
-const SkillSphere = ({ skills }) => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { margin: "200px" });
-
-    return (
-        <div ref={ref} className="w-full h-full min-h-[500px] cursor-grab active:cursor-grabbing">
-            {isInView && (
-                <Canvas camera={{ position: [0, 0, 9.5], fov: 60 }} gl={{ preserveDrawingBuffer: true }}>
-                    <ambientLight intensity={0.5} />
-                    <pointLight position={[10, 10, 10]} />
-                    <RotatingSphere skills={skills} />
-                    <OrbitControls 
-                        enableZoom={false} 
-                        enablePan={false} 
-                        autoRotate 
-                        autoRotateSpeed={3}
-                        enableDamping={true}
-                        dampingFactor={0.05}
-                    />
-                </Canvas>
-            )}
+                ))}
+            </div>
         </div>
     );
 };
